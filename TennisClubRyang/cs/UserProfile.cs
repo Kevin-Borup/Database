@@ -45,7 +45,7 @@ namespace TennisClubRyang.cs
         {
             get
             {
-                object fullName = currentContext.Session["¨FullName"];
+                object fullName = currentContext.Session["FullName"];
                 return (fullName == null) ? default(string) : fullName.ToString();
             }
             set { currentContext.Session["FullName"] = value; }

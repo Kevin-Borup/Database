@@ -29,16 +29,24 @@ namespace TennisClubRyang.cs
             //      Email
             //      Birthdate
 
-            profile.FullName = fullName;
-            profile.AddressRoad = addressRoad;
-            profile.AddressNr = addressNr;
-            profile.AddressPostalCode = addressPostalCode;
-            profile.AddressCity = addressCity;
-            profile.PhoneNr = phoneNr;
-            profile.Email = email;
-            profile.Birthdate = birthdate;
+            if (email.Contains(".") && email.Contains("@"))
+            {
+                validated = true;
+            }
 
             validated = true;
+
+            if (validated)
+            {
+                profile.FullName = fullName;
+                profile.AddressRoad = addressRoad;
+                profile.AddressNr = addressNr;
+                profile.AddressPostalCode = addressPostalCode;
+                profile.AddressCity = addressCity;
+                profile.PhoneNr = phoneNr;
+                profile.Email = email;
+                profile.Birthdate = birthdate;
+            }
 
             return validated;
         }
@@ -48,13 +56,14 @@ namespace TennisClubRyang.cs
             //Validate values here before saving in session.
             bool validated = false;
 
-            profile.Username = username;
-            profile.Password = password;
+            
 
             validated = true;
 
             if (validated)
             {
+                profile.Username = username;
+                profile.Password = password;
                 profile.LoginAdded = true;
             }
 
@@ -69,15 +78,16 @@ namespace TennisClubRyang.cs
             int convertedCardNumber = Convert.ToInt32(cardNumber);
             int convertedCardCode = Convert.ToInt32(cardCode);
 
-            profile.CardName = cardName;
-            profile.CardNumber = convertedCardNumber;
-            profile.CardExpiration = cardExp;
-            profile.CardCode = convertedCardCode;
+            validated = ValidateCreditcardNumber(convertedCardNumber);
 
             validated = true;
 
             if (validated)
             {
+                profile.CardName = cardName;
+                profile.CardNumber = convertedCardNumber;
+                profile.CardExpiration = cardExp;
+                profile.CardCode = convertedCardCode;
                 profile.CreditcardAdded = true;
             }
 
@@ -89,10 +99,10 @@ namespace TennisClubRyang.cs
 
         }
 
-        private void ValidateCreditcard()
+        private bool ValidateCreditcardNumber(int cardNumber)
         {
             //Validate Creditcard
-
+            return true;
         }
 
         public void SendProfileToDatabase()

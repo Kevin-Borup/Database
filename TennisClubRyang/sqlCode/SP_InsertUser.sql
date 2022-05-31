@@ -37,11 +37,7 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	--SELECT @newUserID = (SELECT MAX(ID) FROM Users) + 1;
-	SELECT @newUserID = SCOPE_IDENTITY();
-	 
 	INSERT INTO Users(
-	ID,
 	FullName,
 	AddressRoad,
 	AddressNr,
@@ -51,7 +47,6 @@ BEGIN
 	Email,
 	Birthdate) 
 	VALUES (
-	@newUserID,
 	@FullName,
 	@AddressRoad,
 	@AddressNr,
@@ -60,6 +55,8 @@ BEGIN
 	@PhoneNr,
 	@Email,
 	@Birthdate)
+
+	SELECT @newUserID = SCOPE_IDENTITY();
 
 END
 GO
